@@ -2,7 +2,7 @@ const express = require('express')
 const Todo = require('../models/todo')
 const router = express.Router()
 
-//GET ALL TODOS
+//Get all todos
 router.get('/', async (req, res) => {
     try {
         const todos = await Todo.find()
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-//GET TODO BY ID
+//Get todo by id
 router.get('/:todoId', async (req, res) => {
     try {
         const todo = await Todo.findById(req.params.todoId)
@@ -30,7 +30,7 @@ router.get('/:todoId', async (req, res) => {
     }
 })
 
-//CREATE TODO
+//Create todo
 router.post('/', async (req, res) => {
 
     if (req.body.task == ""  || req.body.task == null){
@@ -56,7 +56,6 @@ router.post('/', async (req, res) => {
         const savedTodo = await todo.save()
         console.log("Todo has been created")
         res.status(201).json(savedTodo)
-
     } catch(err) {
         console.log({ 
             message: "Failed to create todo",
@@ -65,7 +64,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-//UPDATE TODO
+//Update todo
 router.patch('/:todoId', async (req, res) => {
 
     var todoExsists = await Todo.exists({'todoId': req.params.todoId })
@@ -82,7 +81,6 @@ router.patch('/:todoId', async (req, res) => {
         })
         res.json(updatedTodo)
         console.log("Todo with id: " + req.params.todoId + " has been updated")
-
     } catch (err) {
         console.log({
             message:"Failed to update todo with id: " + req.params.todoId,
@@ -91,7 +89,7 @@ router.patch('/:todoId', async (req, res) => {
     }
 })
 
-//DELETE TODO
+//Delete todo
 router.delete('/:todoId', async (req, res) => {
     try {
         const removedTodo = await Todo.remove({_id: req.params.todoId })
@@ -105,7 +103,7 @@ router.delete('/:todoId', async (req, res) => {
     }
 })
 
-//GET ALL TODOS FOR LIST BY LISTID
+//Get all todos for list by listId
 router.get('/list/:listId', async (req, res) => {
     try {
         const todos = await Todo.find({ 'listId': req.params.listId })

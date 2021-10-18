@@ -96,7 +96,7 @@ describe('DELETE /todos', () => {
     })
 
     it('Fail, todo cannot be found', (done) => {
-        request(app).delete('/' + "111") //Använder random id bara
+        request(app).delete('/' + "111")
         .then((res) => {
             const body = res.body
             expect(res).to.have.status(500)
