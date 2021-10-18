@@ -1,5 +1,4 @@
 const express = require('express')
-//const { validate } = require('../models/todo')
 const Todo = require('../models/todo')
 const router = express.Router()
 
